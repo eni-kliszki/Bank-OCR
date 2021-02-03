@@ -1,9 +1,9 @@
 //style
 import { AppContainer } from './App.style';
-import { TransformTextToStringArray } from './textTransformer';
+import { reorderAccountArrays } from './textTransformer';
 
 const App = () => {
-    console.log(TransformTextToStringArray());
+    console.log(reorderAccountArrays());
 
     return (
         <AppContainer>
