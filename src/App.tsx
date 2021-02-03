@@ -1,10 +1,9 @@
 //style
 import { AppContainer } from './App.style';
-
-import { textTransformer } from './textTransformer';
+import { TransformTextToStringArray } from './textTransformer';
 
 const App = () => {
-    console.log(textTransformer());
+    console.log(TransformTextToStringArray());
 
     return (
         <AppContainer>

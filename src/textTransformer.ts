@@ -1,6 +1,6 @@
 import * as accounts from './resources/accountNumbers.json'
 
-export const textTransformer = () : string[][] => {
+export const TransformTextToStringArray = () : string[][] => {
     let array: string[] = accounts.account.split("\n");;
     let numberArrays: string[][] = [];
     
@@ -13,4 +13,8 @@ export const textTransformer = () : string[][] => {
         }
     }
     return numberArrays;
+}
+
+export const findTheMatchWithRealNumber = () =>{
+    
 }
