@@ -1,9 +1,12 @@
-import React from 'react';
+//style
+import { AppContainer } from './App.style';
 
-function App() {
+
+const App = () => {
     return (
-        <div className="App">
-        </div>
+        <AppContainer>
+            <h1>Bank OCR</h1>
+        </AppContainer>
     );
 }
 
