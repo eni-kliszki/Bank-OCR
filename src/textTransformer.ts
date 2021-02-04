@@ -1,4 +1,3 @@
-import textAccounts from './resources/accountNumbers.json'
 import textNumbers from './resources/numbers.json'
 
 
