@@ -2,6 +2,7 @@ import { useQuery } from 'react-query';
 
 //import util functions
 import { findNumberBasedOnText } from '../textTransformer';
+import { validateChecksum } from '../validateNumber'
 
 //import fetch methods
 import {getAccountsUS1} from '../fetchFromBackend';
@@ -15,7 +16,11 @@ const Accounts = () => {
     const checkIfDataNotUndefined = (data: any): boolean => {
         return data !== undefined;
     }
+
+    const checkIfNumberIsInvalid = (number: string) : string => 
+        validateChecksum(number) ? "" : "ERR";
     
+
     if(isLoading){
          return <div>Loading...</div>
     }else if(error) {
@@ -29,7 +34,7 @@ const Accounts = () => {
                 <div>
                 <h3>Accounts:</h3>
                 {accounts.map(account => 
-                    <div key={account}>{account}</div>
+                    <div key={account}>{account} | {checkIfNumberIsInvalid(account)}</div>
                     )}
                 </div>
             )

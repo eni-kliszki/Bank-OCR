@@ -1,4 +1,4 @@
-export const countChecksum = (number : string) => {
+const countChecksum = (number : string) : number => {
     let counter = number.length;
     let checksum = 0;
 
@@ -9,3 +9,5 @@ export const countChecksum = (number : string) => {
     return checksum
 }
 
+export const validateChecksum = (number: string): boolean => 
+    countChecksum(number) % 11 === 0;
