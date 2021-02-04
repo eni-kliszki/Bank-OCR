@@ -38,7 +38,7 @@ const Accounts = () => {
                 <div>
                 <h3>Accounts:</h3>
                 {accounts.map(account => 
-                    <div key={account}>{account} | {checkIfNumberIsInvalidOrIllegal(account)}</div>
+                   <div key={account}>{account} | {checkIfNumberIsInvalidOrIllegal(account)}</div>
                     )}
                 </div>
             )
