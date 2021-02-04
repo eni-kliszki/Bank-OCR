@@ -2,8 +2,10 @@ import { useQuery } from 'react-query';
 
 //import util functions
 import { findNumberBasedOnText } from '../textTransformer';
+
 //import fetch methods
 import {getAccountsUS1} from '../fetchFromBackend';
+
 
 
 const Accounts = () => {
