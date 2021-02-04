@@ -2,7 +2,7 @@ import { useQuery } from 'react-query';
 //style
 import { AppContainer } from './App.style';
 //import util functions
-import { splitDataInNewEveryFourLines, reorderAccountArrays } from './textTransformer';
+import { splitDataInNewEveryFourLines, reorderAccountArrays, findNumberBasedOnText } from './textTransformer';
 //import fetch methods
 import {getAccountsUS1} from './fetchFromBackend'
 
@@ -21,7 +21,7 @@ const App = () => {
     
     if(checkIfDataNotUndefined(data)){
         let accounts:string[] = data!; 
-        console.log(reorderAccountArrays(accounts));
+        console.log(findNumberBasedOnText(accounts));
     }
 
     if(isLoading) return <div>Loading...</div>;
@@ -30,7 +30,6 @@ const App = () => {
     return (
         <AppContainer>
             <h1>Bank OCR</h1>
-
         </AppContainer>
     );
 }

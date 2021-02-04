@@ -1,4 +1,17 @@
-import textNumbers from './resources/numbers.json'
+import { type } from 'os';
+
+const accounts: {[key: string]: string} = {
+    " _ | ||_|": "0",
+    "     |  |": "1",
+    " _  _||_ ": "2",
+    " _  _| _|": "3",
+    "   |_|  |": "4",
+    " _ |_  _|": "5",
+    " _ |_ |_|": "6",
+    " _   |  |": "7",
+    " _ |_||_|": "8",
+    " _ |_| _|": "9"
+}
 
 
 export const splitDataInNewEveryFourLines = (data: string[]) : string[][] => {
@@ -6,6 +19,7 @@ export const splitDataInNewEveryFourLines = (data: string[]) : string[][] => {
     
     let accountText: string[] = [];
     for(let i = 0; i < data.length; i++){
+        data[i] = data[i].replace(',','');
         accountText.push(data[i]);
         if((i + 1) % 4 === 0){
             accountTexts.push(accountText);
@@ -17,8 +31,6 @@ export const splitDataInNewEveryFourLines = (data: string[]) : string[][] => {
 
 export const reorderAccountArrays = (data: string[]) : string[][] =>{
     const accountText = splitDataInNewEveryFourLines(data);
-    console.log(accountText);
-
     let accountArray: string[][] = [];
     const accountLength = 9;
     
@@ -50,12 +62,13 @@ export const reorderAccountArrays = (data: string[]) : string[][] =>{
     return accountArray;
 }
 
-// export const findNumberBasedOnText = () => {
-//     const accountArray = reorderAccountArrays();
-//     const accountLength = 9;
-//     for(let i = 0; i < accountArray.length; i++){
-//         for(let j = 0; j < accountLength; j++){
-//             let string : string = accountArray[i][j];
-//         }
-//     }
-// }
+export const findNumberBasedOnText = (data: string[]) => {
+    const accountArray = reorderAccountArrays(data);
+    const accountLength = 9;
+    for(let i = 0; i < accountArray.length; i++){
+        for(let j = 0; j < accountLength; j++){
+            let numText : string = accountArray[i][j];
+            console.log(accounts[numText]);
+        }
+    }
+}
