@@ -1,17 +1,29 @@
+import { useQuery } from 'react-query';
 //style
 import { AppContainer } from './App.style';
 //import util functions
 import { reorderAccountArrays } from './textTransformer';
-//
-import {getAccountsUS1, AccountType} from './fetchFromBackend'
-import { useQuery } from 'react-query';
+//import fetch methods
+import {getAccountsUS1} from './fetchFromBackend'
+
 
 const App = () => {
-    console.log(reorderAccountArrays())
+    
+    const {data, isLoading, error} = useQuery<string[]>('accounts', getAccountsUS1);
+    
+    const getTotalAccounts = () => null;
+    
+    const checkIfDataNotUndefined = (data: any): boolean => {
+        return data !== undefined;
+    }
 
-    const {data, isLoading, error} = useQuery<AccountType[]>('accounts', getAccountsUS1);
+    if(checkIfDataNotUndefined(data)){
+        let accounts:string[] = data!; 
+        console.log(reorderAccountArrays(accounts));
+    }
 
-    console.log(data);
+    if(isLoading) return <div>Loading...</div>;
+    if(error) return <div>Something went wrong...</div>
 
     return (
         <AppContainer>
