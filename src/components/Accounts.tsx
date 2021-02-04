@@ -5,13 +5,13 @@ import { findNumberBasedOnText } from '../textTransformer';
 import { validateChecksum } from '../validateNumber'
 
 //import fetch methods
-import {getAccountsUS1} from '../fetchFromBackend';
+import {getAccountsUS1, getAccountsUS3} from '../fetchFromBackend';
 
 
 
 const Accounts = () => {
         
-    const {data, isLoading, error} = useQuery<string[]>('accounts', getAccountsUS1);
+    const {data, isLoading, error} = useQuery<string[]>('accounts', getAccountsUS3);
 
     const checkIfDataNotUndefined = (data: any): boolean => {
         return data !== undefined;
