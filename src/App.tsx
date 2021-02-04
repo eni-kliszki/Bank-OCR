@@ -1,13 +1,17 @@
 //style
 import { AppContainer } from './App.style';
 //import util functions
-import { findNumberBasedOnText , reorderAccountArrays } from './textTransformer';
+import { reorderAccountArrays } from './textTransformer';
 //
-import {getAccountsUS1} from './fetchFromBackend'
+import {getAccountsUS1, AccountType} from './fetchFromBackend'
+import { useQuery } from 'react-query';
 
 const App = () => {
     console.log(reorderAccountArrays())
-    console.log(findNumberBasedOnText());
+
+    const {data, isLoading, error} = useQuery<AccountType[]>('accounts', getAccountsUS1);
+
+    console.log(data);
 
     return (
         <AppContainer>

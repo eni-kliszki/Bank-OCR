@@ -1,18 +1,6 @@
 import textAccounts from './resources/accountNumbers.json'
 import textNumbers from './resources/numbers.json'
 
-let numberText : string = {
-    " _ | ||_|": "0",
-    "     |  |": "1",
-    " _  _||_ ": "2",
-    " _  _| _|": "3",
-    "   |_|  |": "4",
-    " _ |_  _|": "5",
-    " _ |_ |_|": "6",
-    " _   |  |": "7",
-    " _ |_||_|": "8",
-    " _ |_| _|": "9"
-}
 
 export const transformTextToStringArray = () : string[][] => {
     let array: string[] = textAccounts.account.split("\n");;
@@ -62,12 +50,12 @@ export const reorderAccountArrays = () : string[][] =>{
     return accountArray;
 }
 
-export const findNumberBasedOnText = () => {
-    const accountArray = reorderAccountArrays();
-    const accountLength = 9;
-    for(let i = 0; i < accountArray.length; i++){
-        for(let j = 0; j < accountLength; j++){
-            let string : string = accountArray[i][j];
-        }
-    }
-}
+// export const findNumberBasedOnText = () => {
+//     const accountArray = reorderAccountArrays();
+//     const accountLength = 9;
+//     for(let i = 0; i < accountArray.length; i++){
+//         for(let j = 0; j < accountLength; j++){
+//             let string : string = accountArray[i][j];
+//         }
+//     }
+// }
