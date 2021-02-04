@@ -1,5 +1,3 @@
-import { type } from 'os';
-
 const accounts: {[key: string]: string} = {
     " _ | ||_|": "0",
     "     |  |": "1",
@@ -62,13 +60,16 @@ export const reorderAccountArrays = (data: string[]) : string[][] =>{
     return accountArray;
 }
 
-export const findNumberBasedOnText = (data: string[]) => {
+export const findNumberBasedOnText = (data: string[]) : string[] => {
     const accountArray = reorderAccountArrays(data);
     const accountLength = 9;
+    let numbers : string[] = [];
     for(let i = 0; i < accountArray.length; i++){
+        let number : string = "";
         for(let j = 0; j < accountLength; j++){
-            let numText : string = accountArray[i][j];
-            console.log(accounts[numText]);
+            number += accounts[accountArray[i][j]];
         }
+        numbers.push(number);
     }
+    return numbers;
 }
