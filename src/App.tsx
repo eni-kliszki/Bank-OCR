@@ -2,7 +2,7 @@ import { useQuery } from 'react-query';
 //style
 import { AppContainer } from './App.style';
 //import util functions
-import { reorderAccountArrays } from './textTransformer';
+import { splitDataInNewEveryFourLines, reorderAccountArrays } from './textTransformer';
 //import fetch methods
 import {getAccountsUS1} from './fetchFromBackend'
 
@@ -17,6 +17,8 @@ const App = () => {
         return data !== undefined;
     }
 
+    
+    
     if(checkIfDataNotUndefined(data)){
         let accounts:string[] = data!; 
         console.log(reorderAccountArrays(accounts));

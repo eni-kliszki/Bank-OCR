@@ -16,40 +16,39 @@ export const splitDataInNewEveryFourLines = (data: string[]) : string[][] => {
 }
 
 export const reorderAccountArrays = (data: string[]) : string[][] =>{
+    const accountText = splitDataInNewEveryFourLines(data);
+    console.log(accountText);
+
     let accountArray: string[][] = [];
-
-        console.log(splitDataInNewEveryFourLines(data));
-        return accountArray;
-    }
+    const accountLength = 9;
     
-    // const accountLength = 9;
+    for(let i = 0; i < accountText.length; i++){
+        let numbers : string[] = [];
+        for(let j = 0; j < accountLength; j++){
+            let firstCharIndex = j*3;
+            let number = "";
+            if(accountText[i][0] === ""){
+                number += "   ";
+            }else{
+                number += accountText[i][0][firstCharIndex];
+                number += accountText[i][0][firstCharIndex + 1];
+                number += accountText[i][0][firstCharIndex + 2];
+            }
 
-    // for(let i = 0; i < accounts.length; i++){
-    //     let numbers : string[] = [];
-    //     for(let j = 0; j < accountLength; j++){
-    //         let firstCharIndex = j*3;
-    //         let number = "";
-    //         if(accounts[i][0] === "\n"){
-    //             number += "   ";
-    //         }else{
-    //             number += accounts[i][0][firstCharIndex];
-    //             number += accounts[i][0][firstCharIndex + 1];
-    //             number += accounts[i][0][firstCharIndex + 2];
-    //         }
+            number += accountText[i][1][firstCharIndex];
+            number += accountText[i][1][firstCharIndex + 1];
+            number += accountText[i][1][firstCharIndex + 2];
 
-    //         number += accounts[i][1][firstCharIndex];
-    //         number += accounts[i][1][firstCharIndex + 1];
-    //         number += accounts[i][1][firstCharIndex + 2];
-
-    //         number += accounts[i][2][firstCharIndex];
-    //         number += accounts[i][2][firstCharIndex + 1];
-    //         number += accounts[i][2][firstCharIndex + 2];
+            number += accountText[i][2][firstCharIndex];
+            number += accountText[i][2][firstCharIndex + 1];
+            number += accountText[i][2][firstCharIndex + 2];
             
-    //         numbers.push(number);
-    //     }
-    //     accountArray.push(numbers)
-    // }
-// }
+            numbers.push(number);
+        }
+        accountArray.push(numbers);
+    }
+    return accountArray;
+}
 
 // export const findNumberBasedOnText = () => {
 //     const accountArray = reorderAccountArrays();
