@@ -25,6 +25,7 @@ const Accounts = () => {
             let accounts = findNumberBasedOnText(dataArray);
             return(
                 <div>
+                <h3>Accounts:</h3>
                 {accounts.map(account => 
                     <div key={account}>{account}</div>
                     )}
