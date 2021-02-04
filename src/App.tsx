@@ -1,10 +1,16 @@
-import React from 'react';
+//style
+import { AppContainer } from './App.style';
+//import components
+import Accounts from './components/Accounts';
 
-function App() {
-    return (
-        <div className="App">
-        </div>
-    );
+const App = () => {
+
+    return(
+        <AppContainer>
+            <h1>Bank OCR</h1>
+            <Accounts/>
+        </AppContainer>
+    )
 }
 
 export default App;
