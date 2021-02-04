@@ -63,13 +63,18 @@ export const reorderAccountArrays = (data: string[]) : string[][] =>{
 export const findNumberBasedOnText = (data: string[]) : string[] => {
     const accountArray = reorderAccountArrays(data);
     const accountLength = 9;
-    let numbers : string[] = [];
+    let accountNumbers : string[] = [];
     for(let i = 0; i < accountArray.length; i++){
-        let number : string = "";
+        let accountNumber : string = "";
         for(let j = 0; j < accountLength; j++){
-            number += accounts[accountArray[i][j]];
+            let arabicNumber = accounts[accountArray[i][j]];
+            if(arabicNumber === undefined){
+                accountNumber += "?";
+            }else{
+                accountNumber += arabicNumber;
+            }
         }
-        numbers.push(number);
+        accountNumbers.push(accountNumber);
     }
-    return numbers;
+    return accountNumbers;
 }
