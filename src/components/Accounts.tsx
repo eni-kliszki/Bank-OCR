@@ -17,8 +17,12 @@ const Accounts = () => {
         return data !== undefined;
     }
 
-    const checkIfNumberIsInvalid = (number: string) : string => 
-        validateChecksum(number) ? "" : "ERR";
+    const checkIfNumberIsInvalidOrIllegal = (number: string) : string => {
+        if(number.includes("?")){
+            return "ILL";
+        }
+        return validateChecksum(number) ? "" : "ERR";
+    }
     
 
     if(isLoading){
@@ -34,7 +38,7 @@ const Accounts = () => {
                 <div>
                 <h3>Accounts:</h3>
                 {accounts.map(account => 
-                    <div key={account}>{account} | {checkIfNumberIsInvalid(account)}</div>
+                    <div key={account}>{account} | {checkIfNumberIsInvalidOrIllegal(account)}</div>
                     )}
                 </div>
             )
