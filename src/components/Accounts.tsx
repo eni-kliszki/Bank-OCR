@@ -6,8 +6,8 @@ import { validateChecksum , checkStatusToAccounts} from '../validateNumber'
 
 //import fetch methods
 import { getAccountsUS3 } from '../fetchFromBackend';
-import { useState } from 'react';
-
+//import components
+import PossibleValidNumbers from './PossibleValidNumbers';
 
 
 const Accounts = () => {
@@ -25,8 +25,15 @@ const Accounts = () => {
             {error && <div>There is no account number</div>}
             <h3>Accounts:</h3>
             {isLoading ? <div>Loading...</div> : (
-                findNumberBasedOnText(data!).map(account => 
-                <div key={account}>{account} | {checkIfNumberIsInvalidOrIllegal(account)}</div>))}
+                findNumberBasedOnText(data!).map(account => {
+                    let status = checkIfNumberIsInvalidOrIllegal(account);
+                    return (
+                        <div>
+                            <div key={account}>{account} | {status}</div>
+                            <PossibleValidNumbers account={account} status={status} />
+                        </div>)}
+                    )
+                )}
         </div>)
         
 }

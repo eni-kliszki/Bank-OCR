@@ -1,4 +1,3 @@
-import { useQuery } from 'react-query';
 //style
 import { AppContainer } from './App.style';
 //import components
