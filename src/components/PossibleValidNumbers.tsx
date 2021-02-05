@@ -9,7 +9,7 @@ type Props = {
 
 
 export const PossibleValidNumbers : React.FC<Props> = ({account, status, accountText}) => {
-    let possibleAccounts = findValidNumbers(status, account)
+    let possibleAccounts = findValidNumbers(status, account, accountText)
 
     return (
         <div>

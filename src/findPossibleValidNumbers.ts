@@ -14,10 +14,10 @@ const possibleNumbers: {[key: string]: string[]} = {
 }
 
 
-export const findValidNumbers = (status : string, account: string): string => {
+export const findValidNumbers = (status : string, account: string, accountText: string[]): string => {
     let possibleAccounts :string[]
     if(status === "ILL"){
-        possibleAccounts = findValidNumbersForIllegal();
+        possibleAccounts = findValidNumbersForIllegal(accountText, account);
         return "AMB [" + possibleAccounts.join(', ') + "]";
     }else if(status === "ERR"){
         possibleAccounts = findValidNumbersForError(account);
@@ -26,8 +26,20 @@ export const findValidNumbers = (status : string, account: string): string => {
     return "";
 }
 
-const findValidNumbersForIllegal = (): string[] => {
+const findValidNumbersForIllegal = (accountText: string[],  account: string,): string[] => {
+    let illegalNumberIndexes = findIllegalNumberIndexes(accountText);
+    
     return ["ILL"];
+}
+
+const findIllegalNumberIndexes = (accountText: string[]) : number[] => {
+    let illegalNumberIndexes : number[] = [];
+    let index = 0;
+    while (index !== -1) {
+        illegalNumberIndexes.push(index);
+        index = accountText.indexOf("?", index + 1);
+      }
+    return illegalNumberIndexes;
 }
 
 const findValidNumbersForError = (account: string): string[] => {
