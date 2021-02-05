@@ -1,5 +1,6 @@
 import { useQuery } from 'react-query';
-
+//import style
+import { AccountContainer } from './Accounts.style';
 //import util functions
 import { findNumberBasedOnText } from '../textTransformer';
 import { validateChecksum} from '../validateNumber'
@@ -28,10 +29,10 @@ const Accounts = () => {
                 findNumberBasedOnText(data!).map(account => {
                     let status = checkIfNumberIsInvalidOrIllegal(account);
                     return (
-                        <div>
+                        <AccountContainer>
                             <div key={account}>{account} | {status}</div>
                             <PossibleValidNumbers account={account} status={status} />
-                        </div>)}
+                        </AccountContainer>)}
                     )
                 )}
         </div>)

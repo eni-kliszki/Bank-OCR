@@ -1,3 +1,17 @@
+const possibleNumbers: {[key: string]: string[]} = {
+    "0": ["8"],
+    "1": ["7"],
+    "2": [""], 
+    "3": ["9"], 
+    "4": [""], 
+    "5": ["9", "6"], 
+    "6": ["8"], 
+    "7": ["1"], 
+    "8": ["0", "9", "6"], 
+    "9": ["3", "8", "5"]
+}
+
+
 export const findValidNumbers = (status : string, account: string): string[] => {
     if(status === "ILL"){
         return findValidNumbersForIllegal();
@@ -13,6 +27,5 @@ const findValidNumbersForIllegal = () => {
 
 const findValidNumbersForError = (number: string): string[] => {
     let validNumbers : string[] = [];
-    console.log(number);
     return ["ERR"];
 }
