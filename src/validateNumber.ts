@@ -1,5 +1,4 @@
 const countChecksum = (number : string) : number => {
-import { validateChecksum } from './validateNumber';
     let counter = number.length;
     let checksum = 0;
 
@@ -19,11 +18,15 @@ export const checkStatusToAccounts = (accountNumbers : string[]) => {
         if(accountNumbers[i].includes("?")){
             findValidNumbersForIllegal();
         }else if(!validateChecksum(accountNumbers[i])){
-            findValidNumbersForError();
+            findValidNumbersForError(accountNumbers[i]);
         }
     }
 }
 
 const findValidNumbersForIllegal = () => {}
 
-const findValidNumbersForError = () => {}
+const findValidNumbersForError = (number: string): string[] => {
+    let validNumbers : string[] = [];
+    console.log(number);
+    return validNumbers;
+}

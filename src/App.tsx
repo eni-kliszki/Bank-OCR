@@ -1,14 +1,15 @@
+import { useQuery } from 'react-query';
 //style
 import { AppContainer } from './App.style';
 //import components
 import Accounts from './components/Accounts';
 
-const App = () => {
 
+const App = () => {
     return(
         <AppContainer>
             <h1>Bank OCR</h1>
-            <Accounts/>
+            <Accounts />
         </AppContainer>
     )
 }
