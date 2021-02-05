@@ -30,7 +30,7 @@ const Accounts = () => {
                     let status = checkIfNumberIsInvalidOrIllegal(account);
                     return (
                         <AccountContainer>
-                            <div key={account}>{account} | {status}</div>
+                            <div key={account}>{account}</div>
                             <PossibleValidNumbers account={account} status={status} />
                         </AccountContainer>)}
                     )

@@ -14,16 +14,19 @@ const possibleNumbers: {[key: string]: string[]} = {
 }
 
 
-export const findValidNumbers = (status : string, account: string): string[] => {
+export const findValidNumbers = (status : string, account: string): string => {
+    let possibleAccounts :string[]
     if(status === "ILL"){
-        return findValidNumbersForIllegal();
+        possibleAccounts = findValidNumbersForIllegal();
+        return "AMB [" + possibleAccounts.join(', ') + "]";
     }else if(status === "ERR"){
-        return findValidNumbersForError(account);
+        possibleAccounts = findValidNumbersForError(account);
+        return "AMB [" + possibleAccounts.join(', ') + "]";
     }
-    return [];
+    return "";
 }
 
-const findValidNumbersForIllegal = () => {
+const findValidNumbersForIllegal = (): string[] => {
     return ["ILL"];
 }
 
