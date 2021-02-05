@@ -27,18 +27,42 @@ export const findValidNumbers = (status : string, account: string, accountText: 
 }
 
 const findValidNumbersForIllegal = (accountText: string[],  account: string,): string[] => {
-    let illegalNumberIndexes = findIllegalNumberIndexes(accountText);
-    
+    let illegalNumberIndexes = findIllegalNumberIndexes(account);
+    for(let idx of illegalNumberIndexes){
+        findPossibleAccountTextsWithPipesAndUnderscores(accountText[idx]);
+    }
     return ["ILL"];
 }
 
-const findIllegalNumberIndexes = (accountText: string[]) : number[] => {
+const findPossibleAccountTextsWithPipesAndUnderscores = (text : string) => {
+    let possibleUnderscorePossitions = [1, 4, 7];
+    let possiblePipePossitions = [3, 5, 6, 8];
+
+    for(let idx of possibleUnderscorePossitions){
+        if(text[idx] === "_"){
+            text.replace("_", " ");
+        }else{
+            text.replace(" ", "_");
+        }
+    }
+
+    for(let idx of possiblePipePossitions){
+        if(text[idx] === "|"){
+            text.replace("|", " ");
+        }else{
+            text.replace(" ", "|");
+        }
+    }
+
+}
+
+const findIllegalNumberIndexes = (account: string) : number[] => {
     let illegalNumberIndexes : number[] = [];
-    let index = 0;
-    while (index !== -1) {
-        illegalNumberIndexes.push(index);
-        index = accountText.indexOf("?", index + 1);
-      }
+    for(let i = 0; i < account.length; i++){
+        if(account[i] === "?"){
+            illegalNumberIndexes.push(i)
+        }
+    }
     return illegalNumberIndexes;
 }
 
