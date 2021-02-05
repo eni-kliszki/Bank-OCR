@@ -2,7 +2,7 @@ import { useQuery } from 'react-query';
 //import style
 import { AccountContainer, AccountNumberContainer } from './Accounts.style';
 //import util functions
-import { findNumberBasedOnText } from '../textTransformer';
+import { reorderAccountArrays, findNumberBasedOnText } from '../textTransformer';
 import { validateChecksum} from '../validateNumber'
 
 //import fetch methods
@@ -13,7 +13,12 @@ import PossibleValidNumbers from './PossibleValidNumbers';
 
 const Accounts = () => {
     const {data, isLoading, error} = useQuery<string[]>('accounts', getAccountsUS3);
+    let reorderedAccountTexts : string[][] = [[]];
 
+    if(!isLoading){
+        reorderedAccountTexts =  reorderAccountArrays(data!);
+    }
+    
     const checkIfNumberIsInvalidOrIllegal = (number: string) : string => {
         if(number.includes("?")){
             return "ILL";
@@ -26,12 +31,12 @@ const Accounts = () => {
             {error && <div>There is no account number</div>}
             <h3>Accounts:</h3>
             {isLoading ? <div>Loading...</div> : (
-                findNumberBasedOnText(data!).map(account => {
+                findNumberBasedOnText(reorderedAccountTexts).map((account, index) => {
                     let status = checkIfNumberIsInvalidOrIllegal(account);
                     return (
                         <AccountContainer>
                             <AccountNumberContainer key={account}>{account}</AccountNumberContainer>
-                            <PossibleValidNumbers account={account} status={status} />
+                            <PossibleValidNumbers account={account} status={status} accountText={reorderedAccountTexts[index]} />
                         </AccountContainer>)}
                     )
                 )}

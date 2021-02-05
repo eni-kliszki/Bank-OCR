@@ -3,11 +3,12 @@ import { findValidNumbers } from '../findPossibleValidNumbers'
 
 type Props = {
     account: string,
-    status: string
+    status: string,
+    accountText: string[]
 }
 
 
-export const PossibleValidNumbers : React.FC<Props> = ({account, status}) => {
+export const PossibleValidNumbers : React.FC<Props> = ({account, status, accountText}) => {
     let possibleAccounts = findValidNumbers(status, account)
 
     return (

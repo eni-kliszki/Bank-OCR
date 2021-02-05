@@ -60,8 +60,7 @@ export const reorderAccountArrays = (data: string[]) : string[][] =>{
     return accountArray;
 }
 
-export const findNumberBasedOnText = (data: string[]) : string[] => {
-    const accountArray = reorderAccountArrays(data);
+export const findNumberBasedOnText = (accountArray: string[][]) : string[] => {
     const accountLength = 9;
     let accountNumbers : string[] = [];
     for(let i = 0; i < accountArray.length; i++){
