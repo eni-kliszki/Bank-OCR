@@ -37,7 +37,7 @@ const findValidNumbersForError = (account: string): string[] => {
         for(let newNumber of possibleNumbers[char]){
             let newAccount = replaceAt(i, newNumber, account);
             if(validateChecksum(newAccount)){
-                validAccounts.push(newAccount);
+                validAccounts.push("'" + newAccount + "'");
             }
         }
     }

@@ -8,10 +8,13 @@ type Props = {
 
 
 export const PossibleValidNumbers : React.FC<Props> = ({account, status}) => {
+    let possibleAccounts = findValidNumbers(status, account)
 
     return (
         <div>
-            {findValidNumbers(status, account)}
+            {possibleAccounts.includes("[]") ? "" : 
+                <span>{possibleAccounts}</span>
+            }
         </div>
         )
         
