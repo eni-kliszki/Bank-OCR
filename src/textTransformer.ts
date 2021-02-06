@@ -58,15 +58,15 @@ export const findNumberBasedOnText = (accountArray: string[][]) : string[] => {
 }
 
 export const findAccountNumberByDict = (accountText: string[], ASCIIdecoder:{[key: string]: string}) => {
-    const accountLength = 9;
     let accountNumber : string = "";
+    const accountLength = 9;
     for(let j = 0; j < accountLength; j++){
-        let arabicNumber = ASCIIdecoder[accountText[j]];
-        if(arabicNumber === undefined){
-            accountNumber += "?";
-        }else{
-            accountNumber += arabicNumber;
-        }
+        accountNumber += findNumberByDict(accountText[j]);
     }
     return accountNumber;
+}
+
+export const findNumberByDict = (text: string) : string => {
+    let arabicNumber = ASCIIdecoder[text];
+    return arabicNumber === undefined ? "?" : arabicNumber;
 }

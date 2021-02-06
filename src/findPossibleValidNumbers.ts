@@ -1,4 +1,6 @@
-import { validateChecksum } from './validateNumber'
+import { validateChecksum } from './validateNumber';
+import { ASCIIdecoder } from './ASCIIdecoder';
+import {findAccountNumberByDict} from './textTransformer'
 
 const possibleNumbers: {[key: string]: string[]} = {
     "0": ["8"],
@@ -26,7 +28,7 @@ export const findValidNumbers = (status : string, account: string, accountText: 
     return "";
 }
 
-const findValidNumbersForIllegal = (accountText: string[],  account: string,): string[] => {
+const findValidNumbersForIllegal = (accountText: string[],  account: string): string[] => {
     let illegalNumberIndexes = findIllegalNumberIndexes(account);
     for(let idx of illegalNumberIndexes){
         findPossibleAccountTextsWithPipesAndUnderscores(accountText[idx]);
