@@ -1,16 +1,4 @@
-const accounts: {[key: string]: string} = {
-    " _ | ||_|": "0",
-    "     |  |": "1",
-    " _  _||_ ": "2",
-    " _  _| _|": "3",
-    "   |_|  |": "4",
-    " _ |_  _|": "5",
-    " _ |_ |_|": "6",
-    " _   |  |": "7",
-    " _ |_||_|": "8",
-    " _ |_| _|": "9"
-}
-
+import { ASCIIdecoder } from './ASCIIdecoder';
 
 export const splitDataInNewEveryFourLines = (data: string[]) : string[][] => {
     let accountTexts: string[][] = [];
@@ -63,17 +51,17 @@ export const reorderAccountArrays = (data: string[]) : string[][] =>{
 export const findNumberBasedOnText = (accountArray: string[][]) : string[] => {
     let accountNumbers : string[] = [];
     for(let i = 0; i < accountArray.length; i++){
-        let accountNumber = findAccountNumberToText(accountArray[i]);
+        let accountNumber = findAccountNumberByDict(accountArray[i], ASCIIdecoder);
         accountNumbers.push(accountNumber);
     }
     return accountNumbers;
 }
 
-export const findAccountNumberToText = (accountText: string[]) => {
+export const findAccountNumberByDict = (accountText: string[], ASCIIdecoder:{[key: string]: string}) => {
     const accountLength = 9;
     let accountNumber : string = "";
     for(let j = 0; j < accountLength; j++){
-        let arabicNumber = accounts[accountText[j]];
+        let arabicNumber = ASCIIdecoder[accountText[j]];
         if(arabicNumber === undefined){
             accountNumber += "?";
         }else{
