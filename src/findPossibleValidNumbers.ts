@@ -39,22 +39,25 @@ const findPossibleAccountTextsWithPipesAndUnderscores = (text : string) => {
     let possiblePipePossitions = [3, 5, 6, 8];
 
     for(let idx of possibleUnderscorePossitions){
+        let newText = "";
         if(text[idx] === "_"){
-            text.replace("_", " ");
+            newText = text.replace("_", " ");
         }else{
-            text.replace(" ", "_");
+            newText = text.replace(" ", "_");
         }
     }
 
     for(let idx of possiblePipePossitions){
+        let newText = "";
         if(text[idx] === "|"){
-            text.replace("|", " ");
+            newText = text.replace("|", " ");
         }else{
-            text.replace(" ", "|");
+            newText = text.replace(" ", "|");
         }
     }
 
 }
+
 
 const findIllegalNumberIndexes = (account: string) : number[] => {
     let illegalNumberIndexes : number[] = [];
