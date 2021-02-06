@@ -1,6 +1,6 @@
 import { validateChecksum } from './validateNumber';
 import { ASCIIdecoder } from './ASCIIdecoder';
-import {findAccountNumberByDict} from './textTransformer'
+import {findNumberByDict} from './textTransformer'
 
 const possibleNumbers: {[key: string]: string[]} = {
     "0": ["8"],
@@ -30,34 +30,42 @@ export const findValidNumbers = (status : string, account: string, accountText: 
 
 const findValidNumbersForIllegal = (accountText: string[],  account: string): string[] => {
     let illegalNumberIndexes = findIllegalNumberIndexes(account);
+    let validAccounts : string[] = [];
     for(let idx of illegalNumberIndexes){
-        findPossibleAccountTextsWithPipesAndUnderscores(accountText[idx]);
+        let array = findPossibleNumbersWithPipesAndUnderscores(account, accountText[idx], idx);
+        array.forEach(val => validAccounts.push(val));
     }
-    return ["ILL"];
+    return validAccounts;
 }
 
-const findPossibleAccountTextsWithPipesAndUnderscores = (text : string) => {
+const findPossibleNumbersWithPipesAndUnderscores = (account: string, text : string, illIndex: number) : string[] => {
     let possibleUnderscorePossitions = [1, 4, 7];
     let possiblePipePossitions = [3, 5, 6, 8];
+    let validAccounts = changeOneCharacterInText(account, text, illIndex, possibleUnderscorePossitions, "_");
+    let validAccoutsPipe = changeOneCharacterInText(account, text, illIndex, possiblePipePossitions, "|");
+    validAccoutsPipe.forEach(val => validAccounts.push(val));
+    return validAccounts;
+}
 
-    for(let idx of possibleUnderscorePossitions){
+const changeOneCharacterInText = (account: string, text : string, illIndex: number, positions: number[], char: string) : string[] =>{
+    let validAccounts : string[] = [];
+    console.log(text)
+    for(let idx of positions){
         let newText = "";
-        if(text[idx] === "_"){
-            newText = text.replace("_", " ");
+        if(text[idx] === char){
+            newText = text.replace(char, " ");
         }else{
-            newText = text.replace(" ", "_");
+            newText = text.replace(" ", char);
+        }
+        let newNumber = findNumberByDict(newText, ASCIIdecoder);
+        if(newNumber !== "?"){
+            let newAccount = replaceAt(illIndex, newNumber, account);
+            if(validateChecksum(newAccount)){
+                validAccounts.push("'" + newAccount + "'");
+            }
         }
     }
-
-    for(let idx of possiblePipePossitions){
-        let newText = "";
-        if(text[idx] === "|"){
-            newText = text.replace("|", " ");
-        }else{
-            newText = text.replace(" ", "|");
-        }
-    }
-
+    return validAccounts;
 }
 
 

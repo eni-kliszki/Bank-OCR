@@ -6,13 +6,13 @@ import { reorderAccountArrays, findNumberBasedOnText } from '../textTransformer'
 import { validateChecksum} from '../validateNumber'
 
 //import fetch methods
-import { getAccountsUS3 } from '../fetchFromBackend';
+import { getAccountsUS4 } from '../fetchFromBackend';
 //import components
 import PossibleValidNumbers from './PossibleValidNumbers';
 
 
 const Accounts = () => {
-    const {data, isLoading, error} = useQuery<string[]>('accounts', getAccountsUS3);
+    const {data, isLoading, error} = useQuery<string[]>('accounts',getAccountsUS4);
     let reorderedAccountTexts : string[][] = [[]];
 
     if(!isLoading){

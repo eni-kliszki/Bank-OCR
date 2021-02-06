@@ -51,22 +51,22 @@ export const reorderAccountArrays = (data: string[]) : string[][] =>{
 export const findNumberBasedOnText = (accountArray: string[][]) : string[] => {
     let accountNumbers : string[] = [];
     for(let i = 0; i < accountArray.length; i++){
-        let accountNumber = findAccountNumberByDict(accountArray[i], ASCIIdecoder);
+        let accountNumber = findAccountNumberByDict(accountArray[i]);
         accountNumbers.push(accountNumber);
     }
     return accountNumbers;
 }
 
-export const findAccountNumberByDict = (accountText: string[], ASCIIdecoder:{[key: string]: string}) => {
+const findAccountNumberByDict = (accountText: string[]) => {
     let accountNumber : string = "";
     const accountLength = 9;
     for(let j = 0; j < accountLength; j++){
-        accountNumber += findNumberByDict(accountText[j]);
+        accountNumber += findNumberByDict(accountText[j], ASCIIdecoder);
     }
     return accountNumber;
 }
 
-export const findNumberByDict = (text: string) : string => {
+export const findNumberByDict = (text: string, ASCIIdecoder:{[key: string]: string}) : string => {
     let arabicNumber = ASCIIdecoder[text];
     return arabicNumber === undefined ? "?" : arabicNumber;
 }
