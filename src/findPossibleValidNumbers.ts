@@ -26,7 +26,10 @@ export const findValidNumbers = (status : string, account: string, accountText: 
         return "ILL"
     }else if(status === "ERR"){
         possibleAccounts = findValidNumbersForError(account);
-        return "AMB [" + possibleAccounts.join(', ') + "]";
+        if(possibleAccounts.length > 0){
+            return "AMB [" + possibleAccounts.join(', ') + "]";
+        }
+        return "ERR"
     }
     return "";
 }
