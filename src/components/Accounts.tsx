@@ -1,40 +1,47 @@
 import { useQuery } from 'react-query';
-
+//import style
+import { AccountContainer, AccountNumberContainer } from './Accounts.style';
 //import util functions
-import { findNumberBasedOnText } from '../textTransformer';
+import { reorderAccountArrays, findNumberBasedOnText } from '../textTransformer';
+import { validateChecksum} from '../validateNumber'
+
 //import fetch methods
-import {getAccountsUS1} from '../fetchFromBackend';
+import { getAccountsUS4 } from '../fetchFromBackend';
+//import components
+import PossibleValidNumbers from './PossibleValidNumbers';
 
 
 const Accounts = () => {
-        
-    const {data, isLoading, error} = useQuery<string[]>('accounts', getAccountsUS1);
+    const {data, isLoading, error} = useQuery<string[]>('accounts',getAccountsUS4);
+    let reorderedAccountTexts : string[][] = [[]];
 
-    const checkIfDataNotUndefined = (data: any): boolean => {
-        return data !== undefined;
+    if(!isLoading){
+        reorderedAccountTexts =  reorderAccountArrays(data!);
     }
     
-    if(isLoading){
-         return <div>Loading...</div>
-    }else if(error) {
-        return <div>Something went wrong...</div>
-    }
-    else{
-        if(checkIfDataNotUndefined(data)){
-            let dataArray:string[] = data!; 
-            let accounts = findNumberBasedOnText(dataArray);
-            return(
-                <div>
-                <h3>Accounts:</h3>
-                {accounts.map(account => 
-                    <div key={account}>{account}</div>
-                    )}
-                </div>
-            )
-        }else{
-            return <div>There is no account number</div>
+    const checkIfNumberIsInvalidOrIllegal = (number: string) : string => {
+        if(number.includes("?")){
+            return "ILL";
         }
+        return validateChecksum(number) ? "" : "ERR";
     }
+
+    return (
+        <div>
+            {error && <div>There is no account number</div>}
+            <h3>Accounts:</h3>
+            {isLoading ? <div>Loading...</div> : (
+                findNumberBasedOnText(reorderedAccountTexts).map((account, index) => {
+                    let status = checkIfNumberIsInvalidOrIllegal(account);
+                    return (
+                        <AccountContainer>
+                            <AccountNumberContainer key={account}>{account}</AccountNumberContainer>
+                            <PossibleValidNumbers account={account} status={status} accountText={reorderedAccountTexts[index]} />
+                        </AccountContainer>)}
+                    )
+                )}
+        </div>)
+        
 }
 
 export default Accounts;
