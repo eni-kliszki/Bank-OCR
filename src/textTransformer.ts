@@ -1,4 +1,4 @@
-import { ASCIIdecoder } from './ASCIIdecoder';
+import { ASCIIdecoder } from './resources/ASCIIdecoder';
 
 export const splitDataInNewEveryFourLines = (data: string[]) : string[][] => {
     let accountTexts: string[][] = [];

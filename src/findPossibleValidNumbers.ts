@@ -1,19 +1,10 @@
-import { validateChecksum } from './validateNumber';
-import { ASCIIdecoder } from './ASCIIdecoder';
+// import resources
+import { ASCIIdecoder } from './resources/ASCIIdecoder';
+import { possibleNumbers } from './resources/possibleNumbers';
+// import util methods
 import {findNumberByDict} from './textTransformer'
+import { validateChecksum } from './validateNumber';
 
-const possibleNumbers: {[key: string]: string[]} = {
-    "0": ["8"],
-    "1": ["7"],
-    "2": [""], 
-    "3": ["9"], 
-    "4": [""], 
-    "5": ["9", "6"], 
-    "6": ["8"], 
-    "7": ["1"], 
-    "8": ["0", "9", "6"], 
-    "9": ["3", "8", "5"]
-}
 
 
 export const findValidNumbers = (status : string, account: string, accountText: string[]): string => {
