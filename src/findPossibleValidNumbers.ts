@@ -49,13 +49,12 @@ const findPossibleNumbersWithPipesAndUnderscores = (account: string, text : stri
 
 const changeOneCharacterInText = (account: string, text : string, illIndex: number, positions: number[], char: string) : string[] =>{
     let validAccounts : string[] = [];
-    console.log(text)
     for(let idx of positions){
         let newText = "";
         if(text[idx] === char){
-            newText = text.replace(char, " ");
+            newText = replaceAt(idx, " ", text);
         }else{
-            newText = text.replace(" ", char);
+            newText = replaceAt(idx, char, text);
         }
         let newNumber = findNumberByDict(newText, ASCIIdecoder);
         if(newNumber !== "?"){
