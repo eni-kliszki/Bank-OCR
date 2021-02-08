@@ -5,7 +5,7 @@ import { AccountContainer, AccountNumberContainer } from './Accounts.style';
 import { findNumbersBasedOnText, reorderAccountArrays } from '../textTransformer';
 import { validateChecksum } from '../validateNumber'
 //import fetch methods
-import {getAccountsUS1, getAccountsUS3} from '../fetchFromBackend';
+import {getAccountsUS3} from '../fetchFromBackend';
 
 
 
