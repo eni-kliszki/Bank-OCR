@@ -71,7 +71,6 @@ export const findNumbersBasedOnText = (accountArray: string[][]) : string[] => {
         let accountNumber = findAccountNumberByDict(accountArray[i]);
         accountNumbers.push(accountNumber);
     }
-    console.log(accountNumbers)
     return accountNumbers;
 }
 
