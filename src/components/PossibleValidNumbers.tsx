@@ -7,7 +7,7 @@ type Props = {
     accountText: string[]
 }
 
-
+// calls the findValidNumbers method and represents the account numbers
 export const PossibleValidNumbers : React.FC<Props> = ({account, status, accountText}) => {
     let possibleAccounts = findValidNumbers(status, account, accountText)
 
