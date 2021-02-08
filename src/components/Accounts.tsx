@@ -3,8 +3,10 @@ import { useQuery } from 'react-query';
 import { AccountContainer, AccountNumberContainer } from './Accounts.style';
 //import util functions
 import { findNumbersBasedOnText, reorderAccountArrays } from '../textTransformer';
+import { validateChecksum } from '../validateNumber'
 //import fetch methods
 import {getAccountsUS1} from '../fetchFromBackend';
+
 
 
 const Accounts = () => {
@@ -16,29 +18,24 @@ const Accounts = () => {
     if(!isLoading){
         reorderedAccountTexts =  reorderAccountArrays(data!);
     }
-    
-    
-    if(isLoading){
-         return <div>Loading...</div>
-    }else if(error) {
-        return <div>Something went wrong...</div>
-    }
-    else{
-        return(
-            <div>
-            <h3>Accounts:</h3>
-            {isLoading ? <div>Loading...</div> : (
-                // representation of account numbers
-                findNumbersBasedOnText(reorderedAccountTexts).map((account, index) => {
-                    return (
-                        <AccountContainer>
-                            <AccountNumberContainer key={index}>{account}</AccountNumberContainer>
-                        </AccountContainer>)}
-                    )
-                )}
-            </div>
-        )
-    }
+
+    const checkIfNumberIsInvalid = (number: string) : string => 
+        validateChecksum(number) ? "" : "ERR";
+
+    return(
+        <div>
+        <h3>Accounts:</h3>
+        {isLoading ? <div>Loading...</div> : (
+            // representation of account numbers
+            findNumbersBasedOnText(reorderedAccountTexts).map((account, index) => {
+                return (
+                    <AccountContainer>
+                        <AccountNumberContainer key={index}>{account} | {checkIfNumberIsInvalid(account)}</AccountNumberContainer>
+                    </AccountContainer>)}
+                )
+            )}
+        </div>
+    )
 }
 
 export default Accounts;
