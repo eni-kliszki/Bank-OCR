@@ -1,46 +1,51 @@
-# Getting Started with Create React App
+##Bank OCR
+This Kata was presented at XP2006 by EmmanuelGaillot and ChristopheThibaut .
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Contents:
 
-## Available Scripts
+Problem Description
+Clues
+Suggested Test Cases
+Resources
+Comments from those who are working on this Kata
+Problem Description
 
-In the project directory, you can run:
+##User Story 1
+You work for a bank, which has recently purchased an ingenious machine to assist in reading letters and faxes sent in by branch offices. The machine scans the paper documents, and produces a file with a number of entries which each look like this:
 
-### `npm start`
+    _  _     _  _  _  _  _ 
+  | _| _||_||_ |_   ||_||_|
+  ||_  _|  | _||_|  ||_| _|
+Each entry is 4 lines long, and each line has 27 characters. The first 3 lines of each entry contain an account number written using pipes and underscores, and the fourth line is blank. Each account number should have 9 digits, all of which should be in the range 0-9. A normal file contains around 500 entries.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Your first task is to write a program that can take this file and parse it into actual account numbers.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+##User Story 2
+Having done that, you quickly realize that the ingenious machine is not in fact infallible. Sometimes it goes wrong in its scanning. The next step therefore is to validate that the numbers you read are in fact valid account numbers. A valid account number has a valid checksum. This can be calculated as follows:
 
-### `npm test`
+account number:  3  4  5  8  8  2  8  6  5
+position names:  d9 d8 d7 d6 d5 d4 d3 d2 d1
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+checksum calculation:
+(d1+2*d2+3*d3+...+9*d9) mod 11 = 0
+So now you should also write some code that calculates the checksum for a given number, and identifies if it is a valid account number.
 
-### `npm run build`
+##User Story 3
+Your boss is keen to see your results. He asks you to write out a file of your findings, one for each input file, in this format:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+457508000
+664371495 ERR
+86110??36 ILL
+ie the file has one account number per row. If some characters are illegible, they are replaced by a ?. In the case of a wrong checksum, or illegible number, this is noted in a second column indicating status.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+##User Story 4
+It turns out that often when a number comes back as ERR or ILL it is because the scanner has failed to pick up on one pipe or underscore for one of the figures. For example
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+    _  _  _  _  _  _     _ 
+|_||_|| || ||_   |  |  ||_ 
+  | _||_||_||_|  |  |  | _|
+The 9 could be an 8 if the scanner had missed one |. Or the 0 could be an 8. Or the 1 could be a 7. The 5 could be a 9 or 6. So your next task is to look at numbers that have come back as ERR or ILL, and try to guess what they should be, by adding or removing just one pipe or underscore. If there is only one possible number with a valid checksum, then use that. If there are several options, the status should be AMB. If you still can’t work out what it should be, the status should be reported ILL.
 
-### `npm run eject`
+##UserStory 5
+Your job is to extend the solution to parse the following hexadecimal digits : ABCDEF 
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
