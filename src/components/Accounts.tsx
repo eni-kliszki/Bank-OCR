@@ -19,6 +19,7 @@ const Accounts = () => {
         reorderedAccountTexts =  reorderAccountArrays(data!);
     }
 
+    // util metod to represent if number is invalid
     const checkIfNumberIsInvalid = (number: string) : string => 
         validateChecksum(number) ? "" : "ERR";
 
